@@ -8,7 +8,7 @@ export class AuthService {
     
   }
 
-  validateUser(authPayloadDto: AuthPayloadDto) {
+  async validateUser(authPayloadDto: AuthPayloadDto) {
     
   }
 
