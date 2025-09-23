@@ -13,8 +13,8 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body() loginPayload: LoginPayloadDto ) {
-    
+  async login(@Body() loginPayload: LoginPayloadDto ) {
+    return await this.authService.validateUser(loginPayload);
   }
 
 }
