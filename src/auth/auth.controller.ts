@@ -7,14 +7,14 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Post('register')
+  async register(@Body() resgisterPayload: RegisterPayloadDto) {
+    return await this.authService.registerUser(resgisterPayload);
+  }
+
   @Post('login')
   login(@Body() authPayload: LoginPayloadDto ) {
     
-  }
-
-  @Post('register')
-  async register(@Body() resgisterPayload: RegisterPayloadDto) {
-
   }
 
 }
