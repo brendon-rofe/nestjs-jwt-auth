@@ -8,10 +8,6 @@ import { RegisterPayloadDto } from './dto/register.dto';
 export class AuthService {
   constructor(private userService: UserService) {}
 
-  async hashPassword(password: string) {
-    return await bcrypt.hash(password, 10);
-  }
-
   async validateUser(loginPayload: LoginPayloadDto) {
     const user = await this.userService.findByEmail(loginPayload.email);
     if (!user) {
@@ -24,7 +20,7 @@ export class AuthService {
   }
 
   async registerUser(resgisterPayload: RegisterPayloadDto) {
-    const hashedPassword = await this.hashPassword(resgisterPayload.password);
+    const hashedPassword = await bcrypt.hash(resgisterPayload.password, 10);
     return await this.userService.create({
       username: resgisterPayload.username,
       email: resgisterPayload.email,

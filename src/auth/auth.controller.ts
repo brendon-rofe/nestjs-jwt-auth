@@ -13,7 +13,7 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body() authPayload: LoginPayloadDto ) {
+  login(@Body() loginPayload: LoginPayloadDto ) {
     
   }
 
