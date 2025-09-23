@@ -1,4 +1,4 @@
-export class RegsterPayloadDto {
+export class RegisterPayloadDto {
 
   username: string;
   email: string;
