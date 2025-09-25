@@ -10,13 +10,13 @@ export class AuthService {
 
   async validateUser(loginPayload: LoginPayloadDto) {
     const user = await this.userService.findByEmail(loginPayload.email);
-    if (!user) {
-      return null;
-    }
-    const passwordMatch = await bcrypt.compare(loginPayload.password, user.password); 
-    if(passwordMatch) {
-      return user;
-    }
+    if (!user) return null;
+
+    const ok = await bcrypt.compare(loginPayload.password, user.password);
+    if (!ok) return null;
+
+    const { password, ...safe } = user;
+    return safe;
   }
 
   async registerUser(resgisterPayload: RegisterPayloadDto) {
