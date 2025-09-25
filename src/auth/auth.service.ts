@@ -19,8 +19,7 @@ export class AuthService {
     const ok = await bcrypt.compare(loginPayload.password, user.password);
     if (!ok) return null;
 
-    const { password, ...safe } = user;
-    return safe;
+    return { id: user.id, username: user.username, email: user.email}
   }
 
   async registerUser(resgisterPayload: RegisterPayloadDto) {
