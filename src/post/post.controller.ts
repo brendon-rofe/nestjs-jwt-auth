@@ -21,4 +21,11 @@ export class PostController {
     return await this.postService.getUserPosts(userid);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async getPostById(@Req() req: any) {
+    const id = req.params.id;
+    return await this.postService.getPostById(id);
+  }
+
 }
