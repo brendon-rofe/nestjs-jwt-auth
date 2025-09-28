@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/creat-post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('post')
 export class PostController {
@@ -26,6 +27,12 @@ export class PostController {
   async getPostById(@Req() req: any) {
     const id = req.params.id;
     return await this.postService.getPostById(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post(':id')
+  async updatePost(@Param('id') id: number, @Body() updatePostData: UpdatePostDto) {
+    return await this.postService.updatePost(id, updatePostData);
   }
 
 }
